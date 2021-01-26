@@ -11,17 +11,27 @@ struct EmojiMemoryGameView: View {
     @ObservedObject var viewModel: EmojiMemoryGame
     
     var body: some View {
-        HStack {
-            ForEach(viewModel.cards) { card in
-                CardView(isFaceUp: card.isFaceUp, content: card.content)
-                    .aspectRatio(2/3, contentMode: .fit)
-                    .onTapGesture {
-                        viewModel.choose(card: card)
-                    }
-                
-            }
+        Grid(viewModel.cards) { card in
+            CardView(isFaceUp: card.isFaceUp, isMatched: card.isMatched, content: card.content)
+                .aspectRatio(2/3, contentMode: .fit)
+                .onTapGesture {
+                    viewModel.choose(card: card)
+                }
+                .padding(5)
         }
         .padding()
+        
+//        HStack {
+//            ForEach(viewModel.cards) { card in
+//                CardView(isFaceUp: card.isFaceUp, content: card.content)
+//                    .aspectRatio(2/3, contentMode: .fit)
+//                    .onTapGesture {
+//                        viewModel.choose(card: card)
+//                    }
+//
+//            }
+//        }
+//        .padding()
     }
 }
 

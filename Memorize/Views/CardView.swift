@@ -9,12 +9,13 @@ import SwiftUI
 
 struct CardView: View {
     var isFaceUp: Bool
+    var isMatched = false
     var content: String
     
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                if isFaceUp {
+                if isFaceUp || isMatched {
                     RoundedRectangle(cornerRadius: cornerSize)
                         .fill(Color.white)
                     RoundedRectangle(cornerRadius: cornerSize)
