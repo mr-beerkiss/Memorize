@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct Theme {
-  
   enum GameSize {
     case random
     case fixed(Int)
@@ -30,4 +29,3 @@ struct Theme {
     }
   }
 }
-

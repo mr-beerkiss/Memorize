@@ -24,11 +24,11 @@ struct GridLayout {
     // not necessarily most optimal code to do this, but easy to follow (hopefully)
     var bestLayout: (rowCount: Int, columnCount: Int) = (1, itemCount)
     var smallestVariance: Double?
-    let sizeAspectRatio = abs(Double(size.width/size.height))
+    let sizeAspectRatio = abs(Double(size.width / size.height))
     for rows in 1...itemCount {
       let columns = (itemCount / rows) + (itemCount % rows > 0 ? 1 : 0)
       if (rows - 1) * columns < itemCount {
-        let itemAspectRatio = sizeAspectRatio * (Double(rows)/Double(columns))
+        let itemAspectRatio = sizeAspectRatio * (Double(rows) / Double(columns))
         let variance = abs(itemAspectRatio - desiredAspectRatio)
         if smallestVariance == nil || variance < smallestVariance! {
           smallestVariance = variance
@@ -62,4 +62,3 @@ struct GridLayout {
     }
   }
 }
-

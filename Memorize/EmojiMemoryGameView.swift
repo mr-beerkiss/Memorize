@@ -15,17 +15,16 @@ struct EmojiMemoryGameView: View {
       VStack {
         HStack {
           Text("Theme: \(viewModel.theme.name)")
-            .frame(width: geometry.size.width/2 - 20, height: nil, alignment: .leading)
+            .frame(width: geometry.size.width / 2 - 20, height: nil, alignment: .leading)
             .padding(.leading, 10)
           Text("Score: \(viewModel.score)")
-            .frame(width: geometry.size.width/2 - 20, height: nil, alignment: .trailing)
+            .frame(width: geometry.size.width / 2 - 20, height: nil, alignment: .trailing)
             .padding(.trailing, 10)
-            
         }
 
         Grid(viewModel.cards) { card in
           CardView(isFaceUp: card.isFaceUp, isMatched: card.isMatched, themeColor: viewModel.theme.color, content: card.content)
-            .aspectRatio(2/3, contentMode: .fit)
+            .aspectRatio(2 / 3, contentMode: .fit)
             .onTapGesture {
               viewModel.choose(card: card)
             }
@@ -35,7 +34,6 @@ struct EmojiMemoryGameView: View {
           viewModel.newGame()
         }
         .padding()
-        
       }
     }
   }
@@ -46,4 +44,3 @@ struct ContentView_Previews: PreviewProvider {
     EmojiMemoryGameView(viewModel: EmojiMemoryGame())
   }
 }
-

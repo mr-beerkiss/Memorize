@@ -8,7 +8,7 @@
 import Foundation
 
 struct MemoryGame<CardContent> where CardContent: Equatable {
-  var cards: Array<Card>
+  var cards: [Card]
   var theme: Theme
   var score: Int = 0
   
@@ -63,7 +63,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
     }
     
     init(content: CardContent) {
-      self.id = UUID().uuidString
+      id = UUID().uuidString
       self.content = content
     }
     
@@ -74,4 +74,3 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
     var content: CardContent
   }
 }
-

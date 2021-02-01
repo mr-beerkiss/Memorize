@@ -20,13 +20,11 @@ struct Grid<Item, ItemView>: View where Item: Identifiable, ItemView: View {
     GeometryReader { geometry in
       body(for: GridLayout(itemCount: items.count, in: geometry.size))
     }
-    
   }
   
   func body(for layout: GridLayout) -> some View {
     ForEach(items) { item in
       body(for: item, in: layout)
-      
     }
   }
   
@@ -47,5 +45,3 @@ struct Grid<Item, ItemView>: View where Item: Identifiable, ItemView: View {
       .position(layout.location(ofItemAt: items.firstIndex(matching: item)!))
   }
 }
-
-

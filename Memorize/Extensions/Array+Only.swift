@@ -9,7 +9,6 @@ import Foundation
 
 extension Array {
   var only: Element? {
-    return self.count == 1 ? self.first : nil
+    return count == 1 ? first : nil
   }
 }
-

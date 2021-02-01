@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 class EmojiMemoryGame: ObservableObject {
   static let themes: [Theme] = [
     Theme(name: "Halloween", emoji: ["👻", "🕷", "🎃", "🧟‍♂️", "🧛🏼‍♂️"], numberOfCards: .random, color: .orange),
@@ -25,7 +24,8 @@ class EmojiMemoryGame: ObservableObject {
   }
   
   // MARK: - Access to the model
-  var cards: Array<MemoryGame<String>.Card> {
+
+  var cards: [MemoryGame<String>.Card] {
     game.cards
   }
   
@@ -38,6 +38,7 @@ class EmojiMemoryGame: ObservableObject {
   }
   
   // MARK: - Intent(s)
+
   func choose(card: MemoryGame<String>.Card) {
     // Adhering to the `ObservableObject` protocol exposes the `objectWillChange` var which allows this class to emit events
     // However, doing this manually is error prone. It's better to use the `@Published` property wrapper
@@ -49,5 +50,3 @@ class EmojiMemoryGame: ObservableObject {
     game = EmojiMemoryGame.createGame()
   }
 }
-
-
