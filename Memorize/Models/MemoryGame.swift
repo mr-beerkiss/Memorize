@@ -9,6 +9,8 @@ import Foundation
 
 struct MemoryGame<CardContent> where CardContent: Equatable {
   var cards: Array<Card>
+  var theme: Theme
+  var score: Int = 0
   
   var indexOfFaceUpCard: Int? {
     get { cards.indices.filter { cards[$0].isFaceUp }.only }
@@ -19,9 +21,10 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
     }
   }
   
-  init(numberOfPairs: Int, cardContentFactory: (Int) -> CardContent) {
+  init(theme: Theme, cardContentFactory: (Int) -> CardContent) {
+    self.theme = theme
     cards = []
-    for pairIndex in 0..<numberOfPairs {
+    for pairIndex in 0..<self.theme.numberOfPairs {
       cards.append(Card(content: cardContentFactory(pairIndex)))
       cards.append(Card(content: cardContentFactory(pairIndex)))
     }
@@ -34,6 +37,18 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
         if cards[chosenIndex].content == cards[potentialMatchIndex].content {
           cards[chosenIndex].isMatched = true
           cards[potentialMatchIndex].isMatched = true
+          score += 2
+        } else {
+          if cards[chosenIndex].wasSeen {
+            score -= 1
+          } else {
+            cards[chosenIndex].wasSeen = true
+          }
+          if cards[potentialMatchIndex].wasSeen {
+            score -= 1
+          } else {
+            cards[chosenIndex].wasSeen = true
+          }
         }
         cards[chosenIndex].isFaceUp = true
       } else {
@@ -55,6 +70,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
     var id: String
     var isFaceUp = false
     var isMatched = false
+    var wasSeen = false
     var content: CardContent
   }
 }

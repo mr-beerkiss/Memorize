@@ -9,19 +9,32 @@ import Foundation
 
 
 class EmojiMemoryGame: ObservableObject {
+  static let themes: [Theme] = [
+    Theme(name: "Halloween", emoji: ["👻", "🕷", "🎃", "🧟‍♂️", "🧛🏼‍♂️"], numberOfCards: .random, color: .orange),
+    Theme(name: "Travel", emoji: ["🛳", "🚲", "🛩", "🚙", "🚈", "🛹"], numberOfCards: .fixed(12), color: .blue),
+    Theme(name: "Music", emoji: ["🎸", "🎹", "🎤", "🎻", "🥁", "🎺"], numberOfCards: .fixed(6), color: .purple)
+  ]
   
   // private(set) means only the class is able to modify the member but anything with a reference to class can read it
   @Published private var game: MemoryGame<String> = createGame()
-  
+
   static func createGame() -> MemoryGame<String> {
-    let cardContent = ["👻", "🕷", "🎃", "🧟‍♂️", "🧛🏼‍♂️"]
-    let numberOfPairs = Int.random(in: 3...5)
-    return MemoryGame<String>(numberOfPairs: numberOfPairs) { pairIndex in cardContent[pairIndex] }
+//    let selectedTheme = Int.random(in: 0..<themes.count)
+    let selectedTheme = 2
+    return MemoryGame<String>(theme: themes[selectedTheme]) { pairIndex in themes[selectedTheme].emoji[pairIndex] }
   }
   
   // MARK: - Access to the model
   var cards: Array<MemoryGame<String>.Card> {
     game.cards
+  }
+  
+  var theme: Theme {
+    game.theme
+  }
+  
+  var score: Int {
+    game.score
   }
   
   // MARK: - Intent(s)
@@ -30,6 +43,10 @@ class EmojiMemoryGame: ObservableObject {
     // However, doing this manually is error prone. It's better to use the `@Published` property wrapper
     //        objectWillChange.send()
     game.choose(card: card)
+  }
+  
+  func newGame() {
+    game = EmojiMemoryGame.createGame()
   }
 }
 

@@ -10,6 +10,7 @@ import SwiftUI
 struct CardView: View {
   var isFaceUp: Bool
   var isMatched = false
+  var themeColor: Color
   var content: String
   
   var body: some View {
@@ -26,7 +27,7 @@ struct CardView: View {
         }
       }
       .font(Font.system(size: fontSize(for: geometry.size)))
-      .foregroundColor(.orange)
+      .foregroundColor(themeColor)
     }
   }
   
@@ -50,8 +51,8 @@ struct CardView_Previews: PreviewProvider {
       
     ]
     Group {
-      CardView(isFaceUp: false, content: cards[0].content)
-      CardView(isFaceUp: true, content: cards[1].content)
+      CardView(isFaceUp: false, themeColor: .red, content: cards[0].content)
+      CardView(isFaceUp: true, themeColor: .red, content: cards[1].content)
     }
     .previewLayout(.fixed(width: 150, height: 200))
     
