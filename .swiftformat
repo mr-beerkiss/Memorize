@@ -1,0 +1,12 @@
+--binarygrouping none
+--commas inline
+--decimalgrouping none
+--hexgrouping none
+--indent 2
+--nospaceoperators ...,..<
+--octalgrouping none
+--patternlet inline
+--semicolons never
+--trimwhitespace nonblank-lines
+--wraparguments before-first
+--wrapcollections before-first
