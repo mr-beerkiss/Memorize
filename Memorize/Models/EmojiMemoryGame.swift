@@ -17,7 +17,7 @@ class EmojiMemoryGame: ObservableObject {
   // private(set) means only the class is able to modify the member but anything with a reference to class can read it
   @Published private var game: MemoryGame<String> = createGame()
 
-  static func createGame() -> MemoryGame<String> {
+  private static func createGame() -> MemoryGame<String> {
 //    let selectedTheme = Int.random(in: 0..<themes.count)
     let selectedTheme = 2
     return MemoryGame<String>(theme: themes[selectedTheme]) { pairIndex in themes[selectedTheme].emoji[pairIndex] }
