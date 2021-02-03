@@ -40,14 +40,19 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
           score += 2
         } else {
           if cards[chosenIndex].wasSeen {
-            score -= 1
+            if score > 0 {
+              score -= 1
+            }
           } else {
             cards[chosenIndex].wasSeen = true
           }
+          
           if cards[potentialMatchIndex].wasSeen {
-            score -= 1
+            if score > 0 {
+              score -= 1
+            }
           } else {
-            cards[chosenIndex].wasSeen = true
+            cards[potentialMatchIndex].wasSeen = true
           }
         }
         cards[chosenIndex].isFaceUp = true
