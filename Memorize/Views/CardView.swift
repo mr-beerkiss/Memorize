@@ -11,49 +11,59 @@ struct CardView: View {
   var isFaceUp: Bool
   var isMatched = false
   var themeColor: Color
+//  var bonusTimeRemaining: Double
   var content: String
   
-  var body: some View {
-    GeometryReader { geometry in
-      ZStack {
-        if isFaceUp || isMatched {
-          RoundedRectangle(cornerRadius: cornerSize)
-            .fill(Color.white)
-          RoundedRectangle(cornerRadius: cornerSize)
-            .stroke(lineWidth: edgeWidth)
-          Pie(startAngle: Angle.degrees(-90), endAngle: Angle.degrees(20), clockwise: true)
-            .padding(5)
-            .opacity(0.35)
-          Text(content)
-        } else {
-          RoundedRectangle(cornerRadius: cornerSize)
-        }
-      }
-      .font(Font.system(size: fontSize(for: geometry.size)))
-      .foregroundColor(themeColor)
-    }
-  }
-//
+  @State private var animatedBonusRemaining: Double = 0
+  
 //  var body: some View {
 //    GeometryReader { geometry in
-//      self.body(for: geometry.size)
-//    }
-//  }
-//
-//  @ViewBuilder
-//  private func body(for size: CGSize) -> some View {
-//    if isFaceUp || !isMatched {
 //      ZStack {
-//        Pie(startAngle: Angle.degrees(-90), endAngle: Angle.degrees(20), clockwise: true)
-//          .padding(5)
-//          .opacity(0.35)
-//        Text(content)
-//          .font(Font.system(size: fontSize(for: size)))
-//
+//        if isFaceUp || isMatched {
+//          RoundedRectangle(cornerRadius: cornerSize)
+//            .fill(Color.white)
+//          RoundedRectangle(cornerRadius: cornerSize)
+//            .stroke(lineWidth: edgeWidth)
+//          Pie(startAngle: Angle.degrees(-90), endAngle: Angle.degrees(20), clockwise: true)
+//            .padding(5)
+//            .opacity(0.35)
+//          Text(content)
+//            .transition(.scale)
+//        } else {
+//          RoundedRectangle(cornerRadius: cornerSize)
+//            .transition(.slide)
+//        }
 //      }
-//      .cardify(isFaceUp: isFaceUp, cardColor: themeColor)
+//      .font(Font.system(size: fontSize(for: geometry.size)))
+//      .foregroundColor(themeColor)
 //    }
 //  }
+//
+  var body: some View {
+    GeometryReader { geometry in
+      self.body(for: geometry.size)
+    }
+  }
+
+  @ViewBuilder
+  private func body(for size: CGSize) -> some View {
+    if isFaceUp || !isMatched {
+      ZStack {
+//        Pie(startAngle: Angle.degrees(-90), endAngle: Angle.degrees(20), clockwise: true)br
+        Pie(startAngle: Angle.degrees(-90), endAngle: Angle.degrees(-animatedBonusRemaining*360-90), clockwise: true)
+          .padding(5)
+          .opacity(0.35)
+        Text(content)
+          .font(Font.system(size: fontSize(for: size)))
+          .rotationEffect(Angle.degrees(isMatched ? 360 : 0))
+          .animation(isMatched ? Animation.linear(duration: 1).repeatForever(autoreverses: false) : .default)
+
+      }
+      .cardify(isFaceUp: isFaceUp, cardColor: themeColor)
+      .transition(.scale)
+      
+    }
+  }
   
   
   // MARK: - Drawing Constants

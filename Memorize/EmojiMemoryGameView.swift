@@ -23,15 +23,20 @@ struct EmojiMemoryGameView: View {
         }
 
         Grid(viewModel.cards) { card in
-          CardView(isFaceUp: card.isFaceUp, isMatched: card.isMatched, themeColor: viewModel.theme.color, content: card.content)
+          CardView(isFaceUp: card.isFaceUp, isMatched: card.isMatched, themeColor: viewModel.theme.color, bonusTimeRemaining: card.bonusTimeRemaining, content: card.content)
             .aspectRatio(2 / 3, contentMode: .fit)
             .onTapGesture {
-              viewModel.choose(card: card)
+              withAnimation(.linear) {
+                viewModel.choose(card: card)
+              }
+              
             }
             .padding(5)
         }
         Button("New Game") {
-          viewModel.newGame()
+          withAnimation(.easeInOut(duration: 2)) {
+            viewModel.newGame()
+          }
         }
         .padding()
       }
