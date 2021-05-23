@@ -23,7 +23,8 @@ struct EmojiMemoryGameView: View {
         }
 
         Grid(viewModel.cards) { card in
-          CardView(isFaceUp: card.isFaceUp, isMatched: card.isMatched, themeColor: viewModel.theme.color, bonusTimeRemaining: card.bonusTimeRemaining, content: card.content)
+//          CardView(isFaceUp: card.isFaceUp, isMatched: card.isMatched, themeColor: viewModel.theme.color, bonusTimeRemaining: card.bonusTimeRemaining, content: card.content)
+          CardView(card: card, themeColor: viewModel.theme.color)
             .aspectRatio(2 / 3, contentMode: .fit)
             .onTapGesture {
               withAnimation(.linear) {

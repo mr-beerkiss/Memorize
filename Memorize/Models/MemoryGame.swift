@@ -68,6 +68,11 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
       self.content = content
     }
     
+    init(content: CardContent, isFaceUp: Bool) {
+      self.init(content: content)
+      self.isFaceUp = isFaceUp
+    }
+    
     var id: String
     var isFaceUp = false {
       didSet {
